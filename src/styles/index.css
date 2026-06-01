@@ -1,0 +1,180 @@
+@import './themes.css';
+@import 'tailwindcss';
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Reset base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tipografía en burbujas de chat */
+.message-bubble h1 { font-size: 1.25rem; font-weight: 700; margin: 12px 0 8px; }
+.message-bubble h2 { font-size: 1.1rem; font-weight: 700; margin: 10px 0 6px; }
+.message-bubble h3 { font-size: 1rem; font-weight: 600; margin: 8px 0 4px; }
+.message-bubble p { margin-bottom: 8px; }
+.message-bubble p:last-child { margin-bottom: 0; }
+.message-bubble ul, .message-bubble ol { padding-left: 1.5em; margin-bottom: 8px; }
+.message-bubble li { margin-bottom: 2px; }
+.message-bubble blockquote {
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 12px;
+  color: var(--text-secondary);
+  margin: 8px 0;
+}
+.message-bubble a { color: var(--accent-primary); text-decoration: underline; }
+.message-bubble a:hover { text-decoration: none; }
+.message-bubble hr { border: none; border-top: 1px solid var(--border-primary); margin: 12px 0; }
+.message-bubble table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 13px; }
+.message-bubble th, .message-bubble td { border: 1px solid var(--border-primary); padding: 6px 10px; text-align: left; }
+.message-bubble th { background: var(--bg-tertiary); font-weight: 600; }
+
+/* Código */
+.message-bubble code {
+  background: var(--bg-code);
+  color: var(--text-code);
+  padding: 2px 5px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+/* Contenedor del bloque de código: aporta fondo, radio y margen.
+   El header y el <pre> son hermanos dentro de este wrapper, así el header NO
+   se mueve cuando el <pre> hace scroll horizontal por código ancho. */
+.message-bubble .code-block {
+  background: var(--bg-code);
+  border-radius: var(--radius-md);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0;
+  overflow: hidden;          /* recorta esquinas redondeadas del pre interno */
+}
+.message-bubble .code-block pre {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+}
+.message-bubble .code-block pre code {
+  background: none;
+  display: block;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre;         /* preserva indentación y longitud de línea */
+  min-width: max-content;   /* código puede ser más ancho que el pre → activa el scroll */
+}
+
+/* Código header con botón copiar — fuera del scroll del <pre> */
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* Toggle switch */
+.toggle-switch { position: relative; display: inline-block; width: 38px; height: 22px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute; inset: 0;
+  background: var(--border-primary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  left: 3px; top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition-fast);
+}
+.toggle-switch input:checked + .toggle-slider { background: var(--accent-primary); }
+.toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+/* Slider de configuración */
+.config-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-primary);
+  outline: none;
+  cursor: pointer;
+}
+.config-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.config-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* Animación typing */
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+/* Animaciones de toast */
+@keyframes toastSlideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes toastSlideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Hover reveal para msg-meta */
+.msg-meta { opacity: 0; transition: opacity 0.15s; }
+.message:hover .msg-meta,
+div[data-id]:hover .msg-meta { opacity: 1 !important; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --sidebar-width: 280px; }
+}
+
+@media (max-width: 500px) {
+  :root { --sidebar-width: 260px; }
+}
+
+@media (max-width: 500px) {
+  :root { --sidebar-width: 100vw; }
+  .message-bubble { font-size: 0.85rem !important; }
+}
