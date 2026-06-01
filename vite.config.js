@@ -12,7 +12,7 @@ export default defineConfig({
     // como file:// en Chrome, igual que el index.html original vanilla.
     viteSingleFile(),
   ],
-  base: './',
+  base: '/chatbot/',
   build: {
     // Necesario para que vite-plugin-singlefile funcione correctamente
     cssCodeSplit: false,

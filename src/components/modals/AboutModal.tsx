@@ -20,7 +20,7 @@ const ICONS: Record<IconKey, React.ReactElement> = {
 interface AboutModalProps { open: boolean; onClose: () => void }
 export function AboutModal({ open, onClose }: AboutModalProps) {
   return (
-    <Modal open={open} onClose={onClose} title="Acerca de Gemini Nano Chat"
+    <Modal open={open} onClose={onClose} title="Acerca de Happy Chat"
       footer={<Btn variant="primary" onClick={onClose}>Entendido</Btn>}>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 18, lineHeight: 1.6 }}>
         Una aplicación de chat que ejecuta <strong>Gemini Nano</strong> directamente en tu navegador,

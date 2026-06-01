@@ -8,6 +8,7 @@ import { TemplatesModal } from './components/modals/TemplatesModal'
 import { ToastContainer, useToast } from './components/ui/Toast'
 import { useAppStore } from './store/useAppStore'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
+import useRedirectFromSessionStorage from './hooks/useRedirectFromSessionStorage'
 import type { Message } from './types'
 
 type ModalType = 'confirm' | 'edit' | 'about' | 'shortcuts' | 'templates'
@@ -36,6 +37,10 @@ export default function App() {
   const [modals, setModals] = useState<ModalsState>(INITIAL_MODALS)
   const { showToast } = useToast()
   const { editMessage, createConversation } = useAppStore()
+  
+  // Redirigir desde 404.html si es necesario
+  useRedirectFromSessionStorage()
+  
   // Acceso directo al store para abortar generación sin instanciar useGemini
   const stopGeneration = useCallback(() => {
     useAppStore.getState().abortController?.abort()

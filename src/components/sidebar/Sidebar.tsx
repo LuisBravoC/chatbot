@@ -59,7 +59,7 @@ export function Sidebar({ onNewChat, onDeleteConversation, onClearAll, onShowTem
             </svg>
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)' }}>Gemini Nano Chat</div>
+            <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)' }}>Happy Chat</div>
             <div style={{ fontSize: 11, color: 'var(--text-tertiary)' }}>IA local y privada</div>
           </div>
         </div>
